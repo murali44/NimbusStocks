@@ -30,7 +30,9 @@ zip -r9 ~/NimbusStocks.zip *
 ######Deploy to AWS Lambda
 ____________________
 
-Create an execution role. For more info see: http://docs.aws.amazon.com/lambda/latest/dg/with-s3-example-create-iam-role.html 
+Create a lambda execution role. For more info see: [Link] (http://docs.aws.amazon.com/lambda/latest/dg/with-s3-example-create-iam-role.html)
+
+Follow these instructions to upload the deployment package and create the lambda function. [Link] (http://docs.aws.amazon.com/lambda/latest/dg/with-s3-example-upload-deployment-pkg.html)
 
 
 
