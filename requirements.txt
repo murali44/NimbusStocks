@@ -1,0 +1,4 @@
+googlefinance
+pytz
+httplib2
+yahoo_finance
