@@ -12,12 +12,11 @@ from yahoo_finance import Share
 
 # Globals
 NIMBUS = Nimbus("config.cfg")
-update_period_sec = 30
 
 
 def trading_hours():
     start = datetime.time(8, 30, 0)
-    end = datetime.time(15, 0, 0)
+    end = datetime.time(15, 1, 0)
     eastern = pytz.timezone('US/Eastern')
     return start <= datetime.datetime.now(eastern).time() <= end
 
