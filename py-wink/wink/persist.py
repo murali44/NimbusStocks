@@ -1,3 +1,4 @@
+import os
 from ConfigParser import ConfigParser
 
 
@@ -21,14 +22,21 @@ class ConfigFile(PersistInterface):
         self.filename = filename
 
     def load(self):
-        cp = ConfigParser()
-        cp.read(self.filename)
-        return dict(cp.items("auth"))
+        creds = {}
+        creds['username'] = os.environ['WINKUSERNAME']
+        creds['client_id'] = os.environ['WINKCLIENT_ID']
+        creds['access_token'] = os.environ['WINKACCESS_TOKEN']
+        creds['client_secret'] = os.environ['WINKCLIENT_SECRET']
+        creds['expires'] = os.environ['WINKEXPIRES']
+        creds['base_url'] = os.environ['WINKBASE_URL']
+        creds['refresh_token'] = os.environ['WINKREFRESH_TOKEN']
+        return creds
 
-    def save(self, data):
-        cp = ConfigParser()
-        cp.add_section("auth")
-        for k, v in data.iteritems():
-            cp.set("auth", k, v)
-        with open(self.filename, "wb") as f:
-            cp.write(f)
+    def save(self, creds):
+        os.environ['WINKUSERNAME'] = creds['username']
+        os.environ['WINKCLIENT_ID'] = creds['client_id']
+        os.environ['WINKACCESS_TOKEN'] = creds['access_token']
+        os.environ['WINKCLIENT_SECRET'] = creds['client_secret']
+        os.environ['WINKEXPIRES'] = creds['expires']
+        os.environ['WINKBASE_URL'] = creds['base_url']
+        os.environ['WINKREFRESH_TOKEN'] = creds['refresh_token']

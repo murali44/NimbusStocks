@@ -15,8 +15,8 @@ NIMBUS = Nimbus("config.cfg")
 
 
 def trading_hours():
-    start = datetime.time(8, 30, 0)
-    end = datetime.time(15, 1, 0)
+    start = datetime.time(9, 30, 0)
+    end = datetime.time(16, 1, 0)
     eastern = pytz.timezone('US/Eastern')
     return start <= datetime.datetime.now(eastern).time() <= end
 
@@ -44,6 +44,8 @@ def handler(event, context):
     if trading_hours():
         update_stock(0, 'OAS')
         update_stock(1, 'UGAZ')
+    else:
+        print "After hours"
 
 
 if __name__ == "__main__":
