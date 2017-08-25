@@ -52,6 +52,7 @@ def daily_spending():
     for i in range(len(transactions)):
         if('Payment' not in transactions[i]['category']):
             amount = amount + transactions[i]['amount']
+            print "%s: %s" % (transactions[i]['name'], transactions[i]['amount'])
 
     days = calendar.monthrange(today.year,today.month)[1]
     remainging_days = days - today.day + 1
@@ -62,7 +63,7 @@ def daily_spending():
     print "remainging_days: %s" % remainging_days
     print "daily_budget: %s:" % daily_budget
     print "bugget_percent: %s" % bugget_percent
-    NIMBUS.set_dial_value(0, int(bugget_percent), "%s" % (daily_budget))
+    NIMBUS.set_dial_value(0, int(bugget_percent), "%.2f" % (daily_budget))
 
 def update_stock(dial, stock):
     stk = Stock(stock)
