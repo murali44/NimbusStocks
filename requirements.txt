@@ -1,3 +1,4 @@
 httplib2
 urllib
 plaid-python>=2.0,<2.1
+yahoo-finance

@@ -8,7 +8,7 @@ import plaid
 import calendar
 import time
 
-from googlefinance import Stock
+from yahoo_finance import Share
 from nimbus import Nimbus
 
 # Globals
@@ -35,9 +35,6 @@ def daily_spending():
     try:
         response = client.Transactions.get(ACCESS_TOKEN, start_date, end_date)
         transactions = response['transactions']
-        print "*****All Transactions*************"
-        print transactions
-        print "**********************************"
 
         # the transactions in the response are paginated, so make multiple calls while increasing the offset to
         # retrieve all transactions
@@ -52,7 +49,7 @@ def daily_spending():
     for i in range(len(transactions)):
         if('Payment' not in transactions[i]['category']):
             amount = amount + transactions[i]['amount']
-            print "%s: %s" % (transactions[i]['name'], transactions[i]['amount'])
+            #print "%s: %s" % (transactions[i]['name'], transactions[i]['amount'])
 
     days = calendar.monthrange(today.year,today.month)[1]
     remainging_days = days - today.day + 1
@@ -65,29 +62,22 @@ def daily_spending():
     print "bugget_percent: %s" % bugget_percent
     NIMBUS.set_dial_value(0, int(bugget_percent), "%.2f" % (daily_budget))
 
-def update_stock(dial, stock):
-    stk = Stock(stock)
-    price = stk.price
-    percent = stk.percentagechange
-    # NIMBUS.set_dial_value(dial, int(float(percent)), "%s:%.2f" % (stock[:2], float(price)))
-    return price
-
 def handler(event, context):
     # Dial 0
     daily_spending()
 
     # Dial 1; Update S&P500 Index
-    sp500 = Stock('.INX')
-    percent_change = sp500.percentagechange
-    NIMBUS.set_dial_value(1, 0, "%s:%.2f" % ('S&P', float(percent_change)))
+    sp500 = Share('^GSPC')
+    percent_change = sp500.get_percent_change()
+    NIMBUS.set_dial_value(1, 0, "%s:%s" % ('S&P', percent_change))
 
     # Dial 2
-    NIMBUS.set_dial_value(2, 1, "-")
+    # NIMBUS.set_dial_value(2, 1, "-")
 
     # Dial 3; Show portfolio total.
-    oas = update_stock(0, 'OAS')
-    ugaz = update_stock(1, 'UGAZ')
-    total = (float(oas) * 1401) + (float(ugaz) * 36) + 21 #cash
+    oas = Share('OAS').get_price()
+    ugaz = Share('UGAZ').get_price()
+    total = (float(oas) * 1401) + (float(ugaz) * 36) + 21.33 #cash
     NIMBUS.set_dial_value(3, 1, "%s" % (total))
 
     
