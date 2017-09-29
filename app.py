@@ -49,7 +49,7 @@ def daily_spending():
     for i in range(len(transactions)):
         if('Payment' not in transactions[i]['category']):
             amount = amount + transactions[i]['amount']
-            #print "%s: %s" % (transactions[i]['name'], transactions[i]['amount'])
+            print "%s: %s" % (transactions[i]['name'], transactions[i]['amount'])
 
     days = calendar.monthrange(today.year,today.month)[1]
     remainging_days = days - today.day + 1
@@ -72,7 +72,11 @@ def handler(event, context):
     NIMBUS.set_dial_value(1, 0, "%s:%s" % ('S&P', percent_change))
 
     # Dial 2
-    # NIMBUS.set_dial_value(2, 1, "-")
+    today = datetime.date.today()
+    someday = datetime.date(2017, 11, 15)
+    diff = someday - today
+    diff.days
+    NIMBUS.set_dial_value(2, 0, "days: %s" % (diff.days))
 
     # Dial 3; Show portfolio total.
     oas = Share('OAS').get_price()
