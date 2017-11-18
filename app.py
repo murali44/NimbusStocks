@@ -8,7 +8,7 @@ import plaid
 import calendar
 import time
 
-from yahoo_finance import Share
+from googlefinance import Stock
 from nimbus import Nimbus
 
 # Globals
@@ -51,6 +51,7 @@ def daily_spending():
             amount = amount + transactions[i]['amount']
             print "%s: %s" % (transactions[i]['name'], transactions[i]['amount'])
 
+    amount = amount + 74.5
     days = calendar.monthrange(today.year,today.month)[1]
     remainging_days = days - today.day + 1
 
@@ -67,20 +68,16 @@ def handler(event, context):
     daily_spending()
 
     # Dial 1; Update S&P500 Index
-    sp500 = Share('^GSPC')
-    percent_change = sp500.get_percent_change()
+    sp500 = Stock('.INX')
+    percent_change = sp500.percentagechange
     NIMBUS.set_dial_value(1, 0, "%s:%s" % ('S&P', percent_change))
 
     # Dial 2
-    today = datetime.date.today()
-    someday = datetime.date(2017, 11, 15)
-    diff = someday - today
-    diff.days
-    NIMBUS.set_dial_value(2, 0, "days: %s" % (diff.days))
+    NIMBUS.set_dial_value(2, 0, "-")
 
     # Dial 3; Show portfolio total.
-    oas = Share('OAS').get_price()
-    ugaz = Share('UGAZ').get_price()
+    oas = Stock('OAS').price
+    ugaz = Stock('UGAZ').price
     total = (float(oas) * 1401) + (float(ugaz) * 36) + 21.33 #cash
     NIMBUS.set_dial_value(3, 1, "%s" % (total))
 
