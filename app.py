@@ -51,7 +51,6 @@ def daily_spending():
             amount = amount + transactions[i]['amount']
             print "%s: %s" % (transactions[i]['name'], transactions[i]['amount'])
 
-    amount = amount + 74.5
     days = calendar.monthrange(today.year,today.month)[1]
     remainging_days = days - today.day + 1
 
