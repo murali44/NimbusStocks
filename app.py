@@ -74,12 +74,8 @@ def handler(event, context):
     # Dial 2
     NIMBUS.set_dial_value(2, 0, "-")
 
-    # Dial 3; Show portfolio total.
-    oas = Stock('OAS').price
-    ugaz = Stock('UGAZ').price
-    total = (float(oas) * 1401) + (float(ugaz) * 36) + 21.33 #cash
-    NIMBUS.set_dial_value(3, 1, "%s" % (total))
-
+    # Dial 3;
+    NIMBUS.set_dial_value(3, 0, "-")
     
 
 
