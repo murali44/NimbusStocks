@@ -16,7 +16,7 @@ pushd $VIRTUAL_ENV/lib/python2.7/site-packages > /dev/null #make silent
 zip -q -r9 ~/NimbusStocks.zip *
 
 echo deploying lambda
-aws lambda update-function-code --function-name NimbusStocks --zip-file fileb://~/NimbusStocks.zip --region us-west-2
+aws lambda update-function-code --function-name NimbusStocks --zip-file fileb://~/NimbusStocks.zip --region us-west-2 --profile muralia
 
 echo cleaning up
 popd > /dev/null #make silent

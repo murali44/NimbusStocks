@@ -46,8 +46,10 @@ def daily_spending():
         print jsonify({'error': {'error_code': e.code, 'error_message': str(e)}})
 
     amount = 0
+    print len(transactions) 
+    print transactions
     for i in range(len(transactions)):
-        if('Payment' not in transactions[i]['category']):
+        if((transactions[i]['category'] == None) or ('Payment' not in transactions[i]['category'])):
             amount = amount + transactions[i]['amount']
             print "%s: %s" % (transactions[i]['name'], transactions[i]['amount'])
 
