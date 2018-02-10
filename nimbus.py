@@ -34,7 +34,7 @@ class Nimbus(object):
         }
 
         # log statement:
-        print "percent = %d%%, label = %s" % (percent, label)
+        print "dial: %d percent: %d%%, label: %s" % (dial_num, percent, label)
 
         # assert manual control (chan. 10) with new config, value, & label:
         dial.update(dict(

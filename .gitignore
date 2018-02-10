@@ -56,5 +56,8 @@ docs/_build/
 # PyBuilder
 target/
 
+# visual studio settings folder
+.vscode/
+
 # project files
 set_env_vars.sh
