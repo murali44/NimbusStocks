@@ -1,0 +1,47 @@
+
+service: WinkNimbus
+
+provider:
+  name: aws
+  runtime: python2.7
+  profile: muralia
+  stage: dev
+  region: us-west-2
+  logRetentionInDays: 14
+  environment: # Service wide environment variables
+    WINKCLIENT_ID: ${file(env_var.yml):WINKCLIENT_ID}
+    WINKEXPIRES: ${file(env_var.yml):WINKEXPIRES}
+    WINKUSERNAME: ${file(env_var.yml):WINKUSERNAME}
+    WINKREFRESH_TOKEN: ${file(env_var.yml):WINKREFRESH_TOKEN}
+    PLAID_PUBLIC_KEY: ${file(env_var.yml):PLAID_PUBLIC_KEY}
+    WINKACCESS_TOKEN: ${file(env_var.yml):WINKACCESS_TOKEN}
+    PLAID_ENV: ${file(env_var.yml):PLAID_ENV}
+    PLAID_SECRET: ${file(env_var.yml):PLAID_SECRET}
+    PLAID_CLIENT_ID: ${file(env_var.yml):PLAID_CLIENT_ID}
+    WINKBASE_URL: ${file(env_var.yml):WINKBASE_URL}
+    WINKCLIENT_SECRET: ${file(env_var.yml):WINKCLIENT_SECRET}
+    ACCESS_TOKEN: ${file(env_var.yml):ACCESS_TOKEN}
+    LOG_LEVEL: ${file(env_var.yml):LOG_LEVEL}
+
+functions:
+  WinkNimbus:
+    name: WinkNimbus
+    description: Display stock info on Nimbus
+    handler: app.handler
+    memorySize: 128
+    timeout: 15
+    events:
+      - schedule: 
+          name: Weekdays-every-5-minutes
+          description: 'Mon to Friday, every 5 minutes 8 AM to 3 PM central time'
+          rate: cron(*/5 13-21 ? * MON-FRI *)
+      - schedule: 
+          name: Weekends-once-daily
+          description: 'Sat and Sunday, once at 8 AM'
+          rate: cron(0 11-23 ? * SAT-SUN *)
+
+plugins:
+  - serverless-python-requirements
+custom:
+  pythonRequirements:
+    dockerizePip: true

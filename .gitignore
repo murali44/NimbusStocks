@@ -59,7 +59,12 @@ target/
 # visual studio settings folder
 .vscode/
 
-# project files
-set_env_vars.sh
-
+# mac files
 .DS_Store
+
+# environment variable files
+set_env_vars.sh
+env_var.yml
+
+# Serverless directories
+.serverless
