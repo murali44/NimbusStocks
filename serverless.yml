@@ -39,6 +39,7 @@ functions:
           name: Weekends-once-daily
           description: 'Sat and Sunday, once at 8 AM'
           rate: cron(0 11-23 ? * SAT-SUN *)
+      - alexaSkill
 
 plugins:
   - serverless-python-requirements
