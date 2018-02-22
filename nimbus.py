@@ -1,5 +1,5 @@
 import sys
-sys.path.append("./py-wink")
+#sys.path.append("./py-wink")
 import wink
 
 

@@ -61,3 +61,5 @@ target/
 
 # project files
 set_env_vars.sh
+
+.DS_Store
