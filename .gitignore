@@ -70,4 +70,4 @@ env_var.yml
 .serverless
 
 # Misc
-node_modules
+node_modules/
