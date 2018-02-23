@@ -1,5 +1,5 @@
 
-service: WinkNimbus
+service: NimbusStock
 
 provider:
   name: aws
@@ -24,8 +24,8 @@ provider:
     LOG_LEVEL: ${file(env_var.yml):LOG_LEVEL}
 
 functions:
-  WinkNimbus:
-    name: WinkNimbus
+  NimbusStock:
+    name: NimbusStock
     description: Display stock info on Nimbus
     handler: app.handler
     memorySize: 128
