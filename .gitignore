@@ -68,3 +68,6 @@ env_var.yml
 
 # Serverless directories
 .serverless
+
+# Misc
+node_modules
