@@ -1,3 +1,0 @@
-[submodule "externals"]
-	path = py-wink
-	url = https://github.com/jso/py-wink.git
