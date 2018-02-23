@@ -1,5 +1,6 @@
 
-service: NimbusStock
+service: WinkDashboard
+Description: Display stock info on a Wink Nimbus
 
 provider:
   name: aws
@@ -24,9 +25,9 @@ provider:
     LOG_LEVEL: ${file(env_var.yml):LOG_LEVEL}
 
 functions:
-  NimbusStock:
-    name: NimbusStock
-    description: Display stock info on Nimbus
+  WinkDashboard:
+    name: WinkDashboard
+    description: Display stock info on a Wink Nimbus
     handler: app.handler
     memorySize: 128
     timeout: 15
@@ -46,3 +47,11 @@ plugins:
 custom:
   pythonRequirements:
     dockerizePip: true
+
+package:
+  exclude:
+    - node_modules/**
+    - set_env_vars.sh
+    - env_var.yml
+    - package.json
+    - package-lock.json

@@ -1,6 +1,6 @@
 {
-  "name": "WinkNimbus",
-  "description": "",
+  "name": "WinkDashboard",
+  "description": "Display stock info on a Wink Nimbus",
   "version": "0.1.0",
   "dependencies": {},
   "devDependencies": {
