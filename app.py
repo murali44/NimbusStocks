@@ -70,7 +70,12 @@ def daily_budget():
         'response': {
             'outputSpeech': {
                 'type': 'PlainText',
-                'text': str(int(budget)) + ' dollars',
+                'text': str(int(budget)) + ' dollars.',
+            },
+            "card": {
+                "type": "Simple",
+                "title": "Daily Budget for " + datetime.date.today().strftime("%B %d, %Y"),
+                "content": str(int(budget)) + ' dollars.'
             }
         }
     }
