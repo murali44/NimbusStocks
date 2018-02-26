@@ -116,7 +116,7 @@ def handler(event, context):
         NIMBUS.set_dial_value(3, 0, "-")
     
 def log(message):
-    if LOG_LEVEL:
+    if LOG_LEVEL and LOG_LEVEL == 'TRUE':
         print message
 
 

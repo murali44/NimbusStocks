@@ -10,19 +10,21 @@ provider:
   region: us-west-2
   logRetentionInDays: 14
   environment: # Service wide environment variables
-    WINKCLIENT_ID: ${file(env_var.yml):WINKCLIENT_ID}
-    WINKEXPIRES: ${file(env_var.yml):WINKEXPIRES}
-    WINKUSERNAME: ${file(env_var.yml):WINKUSERNAME}
-    WINKREFRESH_TOKEN: ${file(env_var.yml):WINKREFRESH_TOKEN}
-    PLAID_PUBLIC_KEY: ${file(env_var.yml):PLAID_PUBLIC_KEY}
-    WINKACCESS_TOKEN: ${file(env_var.yml):WINKACCESS_TOKEN}
-    PLAID_ENV: ${file(env_var.yml):PLAID_ENV}
-    PLAID_SECRET: ${file(env_var.yml):PLAID_SECRET}
-    PLAID_CLIENT_ID: ${file(env_var.yml):PLAID_CLIENT_ID}
-    WINKBASE_URL: ${file(env_var.yml):WINKBASE_URL}
-    WINKCLIENT_SECRET: ${file(env_var.yml):WINKCLIENT_SECRET}
-    ACCESS_TOKEN: ${file(env_var.yml):ACCESS_TOKEN}
-    LOG_LEVEL: ${file(env_var.yml):LOG_LEVEL}
+    WINKCLIENT_ID: ${ssm:WINKCLIENT_ID}
+    WINKEXPIRES: ${ssm:WINKEXPIRES}
+    WINKUSERNAME: ${ssm:WINKUSERNAME}
+    WINKREFRESH_TOKEN: ${ssm:WINKREFRESH_TOKEN}
+    PLAID_PUBLIC_KEY: ${ssm:PLAID_PUBLIC_KEY}
+    WINKACCESS_TOKEN: ${ssm:WINKACCESS_TOKEN}
+    PLAID_ENV: ${ssm:PLAID_ENV}
+    PLAID_SECRET: ${ssm:PLAID_SECRET}
+    PLAID_CLIENT_ID: ${ssm:PLAID_CLIENT_ID}
+    WINKBASE_URL: ${ssm:WINKBASE_URL}
+    WINKCLIENT_SECRET: ${ssm:WINKCLIENT_SECRET}
+    ACCESS_TOKEN: ${ssm:ACCESS_TOKEN}
+    LOG_LEVEL: ${ssm:LOG_LEVEL}
+    ACCESS_TOKEN_2: ${ssm:ACCESS_TOKEN_2}
+    
 
 functions:
   WinkDashboard:
